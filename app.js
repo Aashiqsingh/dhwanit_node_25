@@ -1,15 +1,21 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const app = express();
 
 
-app.get("/getUser",(req,res)=>{
-    // console.log("get Api calledd....");
-    res.json({
-        message:"User fetched successfully..",
-        data:"Dhwanit"
-    })
+const userRoute = require("./routes/userRoute");
+app.use(userRoute)
+
+
+
+mongoose.connect("mongodb://127.0.0.1:27017/dhwanitNode").then(()=>{
+    console.log("Connected to MongoDB");
+}).catch((err)=>{
+    console.error("Error connecting to MongoDB", err);
 })
+
+
 
 
 
